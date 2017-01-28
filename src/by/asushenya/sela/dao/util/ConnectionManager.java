@@ -14,7 +14,9 @@ public class ConnectionManager {
 		try{
 			Class.forName("org.gjt.mm.mysql.Driver");
 		} catch(ClassNotFoundException e){
-			e.printStackTrace();
+			e.printStackTrace();// драйвер, конечно, не загрузился
+			// но мы же никому и ничего не скажем
+			// шшшш, может так пронесет и ничего не сломается
 		}		
 	}
 	
@@ -26,7 +28,9 @@ public class ConnectionManager {
 			
 		} catch (SQLException e) {
 		
-			throw new DAOException (e);
+			throw new DAOException (e);// а тут оборачивать исключение - излишне
+			// на выходе со слоя оно у тебя дважды в DAOException обернется
+			// ему что - холодно?
 		}
 	}
 	
@@ -34,7 +38,8 @@ public class ConnectionManager {
 			
 		try{
 			
-			if(rs != null){rs.close();}
+			if(rs != null){rs.close();}// и тут показывала, что надо в несколлько try-catch блоков оформлять код
+			// и даже расскажывала почему
 			if(st != null){st.close();}
 			if(con != null){con.close();}
 		} catch (SQLException e){
