@@ -18,7 +18,8 @@ public class Controller {
 			
 		} catch(IndexOutOfBoundsException e){
 			response = "incorrect request (controller)";
-			return response+ ": " +e.getMessage();
+			return response+ ": " +e.getMessage();// не надо пользователю сознательно отправлять сообщения, содержащиеся в объектах-исключениях
+			// они и так могут многое поведать о твоем приложении
 		}
 				
 		executionCommand = provider.getCommand(commandName);
@@ -26,7 +27,7 @@ public class Controller {
 		try{
 			response = executionCommand.execute(request);
 			
-		} catch(NullPointerException e){
+		} catch(NullPointerException e){// перехват NullPointer, мама, роди меня обратно
 			
 			response = "NullPointer excecution command (controller)";
 		}	
