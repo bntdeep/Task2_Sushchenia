@@ -15,15 +15,16 @@ import by.asushenya.sela.dao.exception.DAOException;
 
 public class UserDAOImpl implements UserDAO {
 
-	static Connection con = null;
-	static Statement st = null;
+	static Connection con = null;// и атрибуты доступа потерял
+	static Statement st = null;// и замем-то вынес в поля класса и разделил из не то, чтобы для всех пользователей объекта, а вообща для всех объектов
+	// голову явно не включал
 	static ResultSet rs = null;
 		
 	@Override 
 	public void registeredNewUser(User user) throws DAOException{
 		try{
 			con = ConnectionManager.getDBEqupmentConnection();
-			String sql = "insert into user ( login, password) values(?,?)";
+			String sql = "insert into user ( login, password) values(?,?)";// вот это надо было вынести в private static final поля
 			PreparedStatement ps = con.prepareStatement(sql);
 			
 			ps.setString(1, user.getLogin());
@@ -32,7 +33,10 @@ public class UserDAOImpl implements UserDAO {
 			ps.executeUpdate();
 		} catch (SQLException e){		
 	
-			throw new DAOException ("DAOException registeredNewUser: "+e.getMessage());
+			throw new DAOException ("DAOException registeredNewUser: "+e.getMessage());// и какого лешего ты избавляешься от SQLException
+			// я же показывала Антипаттерн
+			// и ты именно тот, кто его и реализовал
+			// поздравляю!
 			
 			} finally{
 				ConnectionManager.disconnectFromDB(rs, st, con);

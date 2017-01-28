@@ -17,7 +17,8 @@ public class ClientServiceImpl implements ClientService {
 		
 		if( user.getLogin()    == null ||
 		    user.getPassword() == null)
-		throw new ServiceException("Incorrect user");
+		throw new ServiceException("Incorrect user");// code convention  за тебя Пушкин будет выполнять?
+		// + валидация - это только проверка на null?
 		 
 	try{		
 		DAOFactory daoFactoryObject = DAOFactory.getInstance();
@@ -28,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
 		
 			throw new ServiceException(e);
 		}
-	}
+	}// форматируй код
 	
 	@Override 
 	public void rentEquipment(User user, Good good) throws ServiceException {
@@ -38,7 +39,7 @@ public class ClientServiceImpl implements ClientService {
 		
 		if(good.getId()     == 0    ||
 		   good.getAmount() == 0	||
-		   good.getPrice()  == 0)
+		   good.getPrice()  == 0)// опять лажа не валидации, отрицательная цена, значит, сгодится
 		throw new ServiceException("Incorrect good");		
 		
 	try{		
@@ -83,7 +84,7 @@ public class ClientServiceImpl implements ClientService {
 			DAOFactory daoFactoryObject = DAOFactory.getInstance();
 			EquipmentsDAO clientService = daoFactoryObject.getEquipmentsDAO();
 			
-			response = clientService.getAllEquipment();
+			response = clientService.getAllEquipment();// что за бред, почему список объектов возвращается строкой?
 			
 			return response;
 			
